@@ -9,7 +9,7 @@ class linked_list:
         self.tale = None
         self.len = 0
     
-    # append a node to the end of the linked list
+    """append a node to the end of the linked list"""
     def append_node(self, data):
         cur, node = self.head, Node(data)
         self.len += 1
@@ -22,7 +22,7 @@ class linked_list:
         cur.next = node
         self.tale = node
        
-    # displays the full linked list
+    """displays the full linked list"""
     def print_list(self):
         cur, list = self.head, []
         while cur != None:
@@ -30,7 +30,7 @@ class linked_list:
             cur = cur.next
         print(list, self.len)
 
-    # replaces a new node to the place of the head
+    """replaces a new node to the place of the head"""
     def unshift_node(self, data):
         cur, node = self.head, Node(data)
         self.len += 1
@@ -41,13 +41,13 @@ class linked_list:
         node.next = cur
         self.head = node
 
-    # removes the first node (head) from the linked list
+    """removes the first node (head) from the linked list"""
     def remove_head(self):
         if self.len > 0:
             self.len -= 1
             self.head = self.head.next
     
-    # removes the last nide from the linked list
+    """removes the last nide from the linked list"""
     def pop(self):
         if self.len <= 1:
             self.head = None
@@ -61,7 +61,7 @@ class linked_list:
         self.tale = prev
         self.len -= 1
 
-    # remove an specific value from the linked list
+    """remove an specific value from the linked list"""
     def remove_by_value(self, data):
         cur, prev = self.head, None
         flag = False
@@ -74,20 +74,20 @@ class linked_list:
             self.len -= 1
             prev.next = cur.next
 
-    # returns a node from the linked list
+    """returns a node from the linked list"""
     def get_node_value(self, index):
         if index > self.len-1 or index < 0:
-            return None
-        else:
-            cur, count = self.head, 0
-            while count < index:
-                cur = cur.next
-                count += 1
-            return cur.data
+            return 
+        cur, count = self.head, 0
+        while count < index:
+            cur = cur.next
+            count += 1
+        return cur.data
 
+    """returns a node value deppending in a index given"""
     def get_node(self, index):
         if index > self.len-1 or index < 0:
-            return None
+            return
         else:
             cur, counter = self.head, 0
             while counter < index:
@@ -95,20 +95,41 @@ class linked_list:
                 counter += 1
             return cur
 
-    # changes the value of any selected node in the linked list
+    """changes the value of any selected node in the linked list"""
     def update_value(self, value, index):
         if index > self.len-1 or index < 0:
             return
+        if index == 0:
+            self.head.data = value
+        elif index == self.len-1:
+            self.tale.data = value
         else:
             to_replace = self.get_node(index)
             to_replace.data = value
-        
+
+    """removes a node using x index"""
     def remove_by_index(self, index):
-        if index < 0 or index > self.len -1:
+        if index < 0 or index > self.len-1:
             return
+        if index == 0:
+            self.remove_head()
+        elif index == self.len-1:
+            self.pop()
         else:
             to_del = self.get_node(index)
             prev = self.get_node(index-1)
             prev.next = to_del.next
-            to_del = None
-        self.len -= 1
+            self.len -= 1
+    
+    """Inserts a valued-node in x index given by the user"""
+    def insert_node(self, index, value):
+        if index < 0 or index > self.len:
+            return
+        if index == 0:
+            self.unshift_node(value)
+        elif index == self.len:
+            self.append_node(value)
+        else:
+            prev, new_node = self.get_node(index-1), Node(value)
+            new_node.next = prev.next
+            prev.next = new_node
