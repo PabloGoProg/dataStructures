@@ -7,7 +7,9 @@ def run():
     ll.append_node('B')
     ll.append_node('C')
     ll.append_node('D')
-    ll.insert_node(5, 1)
+    ll.append_node('E')
+    ll.append_node('F')
+    ll.reverse()
     ll.print_list()
 
 

@@ -133,3 +133,21 @@ class linked_list:
             prev, new_node = self.get_node(index-1), Node(value)
             new_node.next = prev.next
             prev.next = new_node
+            self.len += 1
+
+    """Puts the linked list in a reverse order"""
+    def reverse(self):
+        if self.len <= 1:
+            return
+        else:
+            counter = 0
+            while counter < self.len-1:
+                cur = self.head
+                self.insert_node(self.len-counter, cur.data)
+                self.remove_head()
+                counter += 1
+
+
+
+
+
