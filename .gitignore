@@ -1,9 +1,11 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
+tempCodeRunnerFile.py
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
+/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -122,6 +124,7 @@ celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
+*tempCodeRunnerFile.py
 
 # Environments
 .env
