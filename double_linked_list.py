@@ -57,6 +57,7 @@ class DoubleLinkedList:
         self.head.prev = None
         self.len -= 1
     
+    #deletes the last node from the list
     def pop(self):
         if self.len <= 1:
             self.head = None
@@ -67,6 +68,95 @@ class DoubleLinkedList:
             self.tail.next = None
             self.len -= 1
     
+    '''
+    Returns a wanted node of the list (Memory allocation)
+    '''
+    def get_node(self, index):
+        if index < 0 or index > self.len-1:
+            return
+        cur, counter = self.head, 0
+        while counter < index:
+            cur = cur.next 
+            counter += 1
+        return cur
+
+    '''
+    Returns the value of a wanted node in the list
+    '''
+    def get_node_value(self, index):
+        if index < 0 or index > self.len-1:
+            return
+        cur, counter = self.head, 0
+        while counter < index:
+            cur = cur.next
+            counter += 1
+        return cur.data
+
+    '''
+    Replaces the value of a wanted indexed node
+    ''' 
+    def update_value(self, value, index):
+        if index > self.len-1 or index < 0:
+            return
+        if index == 0:
+            self.head.data = value
+        elif index == self.len-1:
+            self.tail.data = value
+        else:
+            to_rep = self.get_node(index)
+            to_rep.data = value
+
+    '''
+    Inserts a node in a specific index of the list
+    '''
+    def insert_node(self, index, value):
+        if index < 0 or index > self.len:
+            return
+        if index == 0:
+            self.unshift_node(value)
+        elif index == self.len:
+            self.append_node(value)
+        else:
+            prev = self.get_node(index-1)
+            next = prev.next
+            new_node = self.Node(value)
+            #Asignaciones de enlace
+            prev.next = new_node
+            new_node.prev = prev
+            new_node.next = next
+            next.prev = new_node
+            self.len += 1
+
+    '''
+    Removes a eanted indexed node from the list
+    '''
+    def remove_by_index(self, index):
+        if index < 0 or index > self.len-1:
+            return
+        if index == 0:
+            self.remove_head()
+        elif index == self.len-1:
+            self.pop()
+        else:
+            temp = self.get_node(index)
+            next = temp.next
+            prev = temp.prev
+            #Asignaciones de enlace
+            prev.next = next
+            next.prev = prev
+            self.len -= 1
+
+    '''
+    Puts the list in reverse order
+    '''
+    def reverse(self):
+        if self.len <= 1:
+            return
+        for i in range(self.len):
+            cur = self.head
+            self.insert_node(self.len-i, cur.data)
+            self.remove_head()
+
 
 
     
