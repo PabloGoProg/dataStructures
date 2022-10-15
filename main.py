@@ -1,17 +1,14 @@
-from signly_linked_list import Node 
-from signly_linked_list import linked_list
+from double_linked_list import DoubleLinkedList
     
 def run():
-    ll = linked_list()
-    ll.append_node('A')
-    ll.append_node('B')
-    ll.append_node('C')
-    ll.append_node('D')
-    ll.append_node('E')
-    ll.append_node('F')
-    ll.reverse()
-    ll.print_list()
-
+    ll = DoubleLinkedList()
+    ll.append_node(1)
+    ll.append_node(2)
+    ll.append_node(3)
+    ll.pop()
+    ll.pop()
+    ll.pop()
+    ll.print()
 
 if __name__ == '__main__':
     run()
